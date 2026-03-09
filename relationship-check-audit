@@ -8,3 +8,5 @@ FROM [Journey] c
 LEFT JOIN [Route] p
    ON p.str_RouteID = c.str_RouteID
       where p.str_RouteID is not null;
+
+--next sql query will go here.
