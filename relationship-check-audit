@@ -9,4 +9,14 @@ LEFT JOIN [Route] p
    ON p.str_RouteID = c.str_RouteID
       where p.str_RouteID is not null;
 
---next sql query will go here.
+SELECT 
+  COUNT(*) AS child_rows,
+  SUM(CASE WHEN c.str_RouteID IS NULL THEN 1 ELSE 0 END) AS child_nulls,
+  SUM(CASE WHEN c.str_RouteID IS NOT NULL AND p.str_RouteID IS NULL THEN 1 ELSE 0 END) AS orphan_rows,
+  SUM(CASE WHEN p.str_RouteID IS NOT NULL THEN 1 ELSE 0 END) AS matched_rows
+FROM [RouteStage] c
+LEFT JOIN [Route] p
+   ON p.str_RouteID = c.str_RouteID
+      where p.str_RouteID is not null;
+
+
